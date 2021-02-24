@@ -24,6 +24,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 )
 
 var h = http.FileServer(_escDir(false, ""))
@@ -33,6 +34,7 @@ var h = http.FileServer(_escDir(false, ""))
 func Handler(json func() ([]byte, error)) http.HandlerFunc {
 	mime.AddExtensionType(".svg", "image/svg+xml")
 	return func(w http.ResponseWriter, r *http.Request) {
+		r.URL.Path = strings.Replace(r.URL.Path, "/docs", "", -1)
 		if r.URL.Path == "/swagger.json" {
 			data, err := json()
 			if os.IsNotExist(err) {
