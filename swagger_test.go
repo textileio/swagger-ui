@@ -6,7 +6,7 @@ import (
 	"net/http/httputil"
 	"testing"
 
-	"github.com/go-mixins/swagger-ui"
+	"github.com/textileio/swagger-ui"
 )
 
 func TestDir(t *testing.T) {
